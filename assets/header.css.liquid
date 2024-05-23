@@ -1,0 +1,49 @@
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header h1 {
+    text-transform: uppercase;
+}
+header h1 > a {
+    text-decoration: none;
+    color: inherit;
+}
+header ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+header li > a {
+    text-decoration: none;
+    color: inherit;
+}
+header li > a:hover {
+    color: lightskyblue;
+}
+header .nav-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
+header .nav-icon:hover {
+    stroke: lightskyblue;
+}
+header .cart-link {
+    position: relative;
+}
+header .cart-link .item-count {
+    width: 15px;
+    height: 15px;
+    font-size: 10px;
+    background-color: blueviolet;
+    color: white;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -25%;
+    right: -25%;
+}

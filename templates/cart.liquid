@@ -1,0 +1,41 @@
+{{ 'cart.css' | asset_url | stylesheet_tag }}
+
+<main class="cart">
+  {% form 'cart', cart %}
+    <section class="heading">
+      <h1>Cart</h1>
+      <button type="submit" name="update" class="update">Update</button>
+    </section>
+    <section class="items">
+      {% for item in cart.items %}
+        <div class="item">
+          <img src="{{ item.image | image_url }}" width="70" height="70">
+          <div class="content">
+            <h2 class="title">{{ item.title }}</h2>
+            <p>{{ item.final_price | money }}</p>
+          </div>
+          <input min="1" type="number" name="updates[]" value="{{ item.quantity }}" class="quantity">
+          <a href="{{ item.url_to_remove }}" class="remove">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="icon"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </a>
+        </div>
+      {% endfor %}
+    </section>
+    <div class="divider"></div>
+    <section class="checkout">
+      <div>
+        <p>Total: {{ cart.total_price | money }}</p>
+        <button type="submit" name="checkout">Checkout</button>
+      </div>
+    </section>
+  {% endform %}
+</main>

@@ -1,0 +1,13 @@
+[
+    {
+        "name": "Typography",
+        "settings": [
+            {
+                "type": "font_picker",
+                "id": "base_font",
+                "label": "Base font",
+                "default": "inter_n3"
+            }
+        ]
+    }
+]

@@ -1,0 +1,52 @@
+.collection {
+    margin: 5rem 0;
+}
+.collection .title {
+    text-align: center;
+    font-weight: 100;
+}
+.collection .collection-products {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+}
+.collection .sort-option {
+    text-align: end;
+    margin: 3rem 0;
+}
+.collection .sort-option select {
+    padding: 10px 20px;
+    background-color: rgb(241, 241, 241);
+    border: none;
+}
+.collection .pagination {
+    text-align: center;
+    margin-top: 3rem;
+}
+.collection .pagination a {
+    border: 1px solid lightgray;
+    padding: 5px;
+    aspect-ratio: 1 / 1;
+    background-color: rgb(246, 246, 246);
+    text-decoration: none;
+}
+.collection .pagination .page.current {
+    padding: 5px;
+    background-color: rgb(255, 208, 0);
+    color: rgb(246, 246, 246);
+}
+@media screen and (min-width: 768px) {
+    .collection .collection-products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (min-width: 1024px) {
+    .collection .collection-products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media screen and (min-width: 1280px) {
+    .collection .collection-products {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

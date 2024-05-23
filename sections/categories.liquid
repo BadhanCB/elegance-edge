@@ -1,0 +1,30 @@
+{{ 'categories.css' | asset_url | stylesheet_tag }}
+
+<section class="categories">
+  <a href="/collections/men" class="men single-category">
+    <h2>MEN</h2>
+    <p>Where Dreams Meet Couture</p>
+    <Button class="shop-now-btn">Shop Now</Button>
+  </a>
+  <a href="/collections/women" class="women single-category">
+    <h2>WOMEN</h2>
+    <p>Enchanting Styles for Every Woman</p>
+    <Button>Shop Now</Button>
+  </a>
+  <a href="/collections/jewelery" class="jewelery single-category">
+    <h2>JEWELERY</h2>
+    <p>Lifting Up Your Looks</p>
+    <Button>Shop Now</Button>
+  </a>
+  <a href="/collections/apparel-accessories" class="accessories single-category">
+    <h2>Accessories</h2>
+    <p>Chic Accessories for City Living</p>
+    <Button>Shop Now</Button>
+  </a>
+</section>
+{% schema %}
+{
+  "name": "Categories",
+  "presets": [{ "name": "Categories" }]
+}
+{% endschema %}

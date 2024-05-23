@@ -1,0 +1,76 @@
+.categories {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, minmax(300px, auto));
+    grid-auto-rows: minmax(300px, auto);
+    gap: 5px;
+    margin: 5rem 0;
+}
+.categories .single-category {
+    padding: 2rem;
+    background-size: cover;
+    background-position: center;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+.categories .men {
+    background-image: url("{{ 'men.webp' | asset_url }}");
+}
+.categories .women {
+    background-image: url("{{ 'women.webp' | asset_url }}");
+}
+.categories .jewelery {
+    background-image: url("{{ 'jewelery.webp' | asset_url }}");
+}
+.categories .accessories {
+    background-image: url("{{ 'accessories.webp' | asset_url }}");
+}
+.categories button {
+    padding: 10px 20px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+.categories .men:hover button {
+    background-color: rgb(19, 31, 31);
+    color: whitesmoke;
+}
+.categories .women:hover button {
+    background-color: rgb(19, 31, 31);
+    color: whitesmoke;
+}
+.categories .jewelery:hover button {
+    background-color: rgb(19, 31, 31);
+    color: whitesmoke;
+}
+.categories .accessories:hover button {
+    background-color: rgb(19, 31, 31);
+    color: whitesmoke;
+}
+@media screen and (min-width: 768px) {
+    .categories {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .categories .men {
+        grid-column: span 2 / span 2;
+    }
+    .categories .accessories {
+        grid-column: span 2 / span 2;
+    }
+}
+@media screen and (min-width: 1024px) {
+    .categories {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .categories .men {
+        grid-column: auto;
+        grid-row: span 2 / span 2;
+    }
+    .categories .women {
+        grid-column: span 2 / span 2;
+    }
+    .categories .accessories {
+        grid-column: auto;
+    }
+}

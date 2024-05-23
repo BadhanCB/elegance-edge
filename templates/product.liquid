@@ -1,0 +1,26 @@
+{{ 'product.css' | asset_url | stylesheet_tag }}
+
+<main class="product-page">
+  <section class="media-content">
+    <div class="img-wrapper">
+      <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" width="auto" height="auto">
+    </div>
+  </section>
+  <section class="product-info">
+    <h1>{{ product.title }}</h1>
+    <h3>{{ product.price | money }}</h3>
+    <p>{{ product.description }}</p>
+    {% form 'product', product %}
+      <div>
+        <p>Variant</p>
+        <select name="id">
+          {% for varient in product.variants %}
+            <option value="{{ varient.id }}">{{ varient.title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit">Add To Cart</button>
+    {% endform %}
+  </section>
+</main>

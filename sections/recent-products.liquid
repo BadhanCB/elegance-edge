@@ -1,0 +1,41 @@
+{{ 'recent-products.css' | asset_url | stylesheet_tag }}
+<script src="{{ "recent-products.js" | asset_url }}" defer></script>
+
+<section class="recent-products">
+  <h2 class="title">New Arrivals</h2>
+  <div class="products">
+    {% for product in collections.recent.products limit: 12 %}
+      {% render 'product-card', product: product %}
+    {% endfor %}
+  </div>
+  <div class="buttons">
+    <button class="prev">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+      </svg>
+    </button>
+    <button class="next">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    </button>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Recent Products",
+  "presets": [{ "name": "Recent Products" }]
+}
+{% endschema %}
