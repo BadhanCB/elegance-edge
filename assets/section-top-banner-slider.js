@@ -11,3 +11,8 @@ prevBtn.addEventListener("click", () => {
     activeIndex = activeIndex === 0 ? 2 : activeIndex - 1;
     topSlider.style.translate = `-${100 * activeIndex}%`;
 });
+
+setInterval(() => {
+    activeIndex = activeIndex === 2 ? 0 : activeIndex + 1;
+    topSlider.style.translate = `-${100 * activeIndex}%`;
+}, 3600);

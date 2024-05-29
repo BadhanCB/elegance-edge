@@ -1,12 +1,13 @@
 .recent-products {
     width: 100%;
     position: relative;
-    margin: 5rem 0;
+    margin: 5rem auto;
 }
 .recent-products .title {
     font-size: 3rem;
     font-weight: 100;
     text-align: center;
+    margin-bottom: 2rem;
 }
 .recent-products .products {
     display: grid;
@@ -101,7 +102,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: calc(100% + 60px);
+    width: calc(100% - 1rem);
     z-index: 999;
     display: flex;
     justify-content: space-between;

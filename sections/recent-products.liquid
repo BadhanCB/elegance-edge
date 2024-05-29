@@ -1,7 +1,7 @@
-{{ 'recent-products.css' | asset_url | stylesheet_tag }}
-<script src="{{ "recent-products.js" | asset_url }}" defer></script>
+{{ 'section-recent-products.css' | asset_url | stylesheet_tag }}
+<script src="{{ "section-recent-products.js" | asset_url }}" defer></script>
 
-<section class="recent-products">
+<section class="recent-products wrapper">
   <h2 class="title">New Arrivals</h2>
   <div class="products">
     {% for product in collections.recent.products limit: 12 %}

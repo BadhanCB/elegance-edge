@@ -1,0 +1,13 @@
+{{ 'component-banner-product-slide.css' | asset_url | stylesheet_tag }}
+
+<div class="banner-slide-item">
+  <div class="product-content">
+    <p>{{ product.tags.first | upcase }}</p>
+    <h3>{{ product.title }}</h3>
+    <P class="price">{{ product.price | money }}</P>
+    <a href="{{ product.url }}"><button>Buy Now</button></a>
+  </div>
+  <div class="img-wrapper">
+    <img class="featured-img" src="{{ product.featured_image | image_url }}" width="auto" height="auto" loading="eager">
+  </div>
+</div>

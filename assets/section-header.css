@@ -1,0 +1,172 @@
+#shopify-section-header {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background-color: white;
+}
+header {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+header nav {
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header h1 {
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+}
+header h1 > a {
+    text-decoration: none;
+    color: inherit;
+}
+header .nav-bar {
+    display: flex;
+}
+header ul {
+    flex: 1;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+header .links {
+    gap: 0.5rem;
+    display: none;
+}
+header .mobile-links {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.5);
+    z-index: 99999;
+    transition: left 1s;
+}
+header .mobile-link-list {
+    width: 320px;
+    height: 100%;
+    padding: 2rem;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    background-color: white;
+    position: relative;
+}
+header .header-btns {
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+header li > a {
+    text-decoration: none;
+    color: inherit;
+}
+header li > a:hover {
+    color: lightskyblue;
+}
+header .nav-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
+header .nav-icon:hover {
+    stroke: lightskyblue;
+}
+header .cart-link {
+    position: relative;
+}
+header .cart-link .item-count {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    background-color: rgb(25, 25, 25);
+    color: white;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -25%;
+    right: -25%;
+}
+#hamburger-btn,
+#mobile-nav-close-btn {
+    display: block;
+    padding: 0;
+    margin: 0 1rem 0 0;
+    border: none;
+    background-color: transparent;
+}
+#mobile-nav-close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+#mobile-nav-close-btn > svg {
+    stroke: orange;
+    width: 2rem;
+    height: 2rem;
+}
+@media screen and (min-width: 768px) {
+    #hamburger-btn {
+        display: block;
+    }
+    header h1 {
+        font-size: 25px;
+    }
+    header .links {
+        gap: 0.75rem;
+    }
+    header .header-btns {
+        gap: 0.65rem;
+    }
+    header .links {
+        display: none;
+    }
+    header .mobile-links {
+        display: block;
+    }
+}
+@media screen and (min-width: 1024px) {
+    header h1 {
+        font-size: 30px;
+    }
+    header .links {
+        gap: 1rem;
+    }
+    header .header-btns {
+        gap: 0.75rem;
+    }
+    #hamburger-btn {
+        display: none;
+    }
+    header .mobile-links {
+        display: none;
+    }
+    header .links {
+        display: flex;
+    }
+}
+@media screen and (min-width: 1280px) {
+    header h1 {
+        font-size: 35px;
+    }
+    header .links {
+        gap: 1.5rem;
+    }
+    header .header-btns {
+        gap: 1rem;
+    }
+}
+@media screen and (min-width: 1536px) {
+    header h1 {
+        font-size: 40px;
+    }
+}

@@ -1,5 +1,6 @@
-{{ 'best-selling.css' | asset_url | stylesheet_tag }}
-<section class="best-selling">
+{{ 'section-best-selling.css' | asset_url | stylesheet_tag }}
+
+<section class="best-selling wrapper">
   <h1 class="title">Best Selling</h1>
   <div class="products">
     {% for product in collections['best-selling'].products limit: 12 %}
