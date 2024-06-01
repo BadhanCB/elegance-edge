@@ -12,7 +12,6 @@ const dragStartFeaturedProduct = (e) => {
     featuredSlider.style.cursor = "grabbing";
     featuredSlider.style.scrollBehavior = "auto";
     featuredSlider.style.scrollSnapType = "none";
-    featuredSlider.classList.add("dragging");
     featuredProductStartX = e.pageX;
     featuredProductStartScrollLeft = featuredSlider.scrollLeft;
 };
@@ -28,7 +27,6 @@ const dragEndFeaturedProduct = () => {
     featuredSlider.style.cursor = "pointer";
     featuredSlider.style.scrollBehavior = "smooth";
     featuredSlider.style.scrollSnapType = "mandatory";
-    featuredSlider.classList.remove("dragging");
 };
 
 featuredSlider.addEventListener("mousedown", dragStartFeaturedProduct);

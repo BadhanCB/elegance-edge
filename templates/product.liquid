@@ -1,26 +1,183 @@
 {{ 'product.css' | asset_url | stylesheet_tag }}
 
-<main class="product-page">
+<main class="product-page wrapper">
   <section class="media-content">
-    <div class="img-wrapper">
-      <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" width="auto" height="auto">
+    <div class="featured-img">
+      {% assign displayImage = '' %}
+      {% if product.selected_or_first_available_variant.featured_image %}
+        {% assign displayImage = product.selected_or_first_available_variant.featured_image %}
+      {% else %}
+        {% assign displayImage = product.featured_image %}
+      {% endif %}
+      <img
+        src="{{ displayImage | image_url }}"
+        alt="{{ product.title }}"
+        width="auto"
+        height="auto"
+        id="display-img"
+      >
+    </div>
+    <div class="thumbnail-images">
+      {% for image in product.images %}
+        <div class="thumbnail-img-wrapper">
+          <img
+            src="{{ image | image_url }}"
+            alt="{{ image.alt }}"
+            width="auto"
+            height="auto"
+          >
+        </div>
+      {% endfor %}
     </div>
   </section>
+
   <section class="product-info">
-    <h1>{{ product.title }}</h1>
-    <h3>{{ product.price | money }}</h3>
-    <p>{{ product.description }}</p>
+    <h1 class="title">{{ product.title }}</h1>
+    <div class="prices">
+      {% unless product.compare_at_price == product.price %}
+        <p class="compare_at_price">{{ product.compare_at_price | money }}</p>
+      {% endunless %}
+      <p class="price">{{ product.price | money }}</p>
+    </div>
+    <p class="description">{{ product.description }}</p>
     {% form 'product', product %}
-      <div>
-        <p>Variant</p>
-        <select name="id">
-          {% for varient in product.variants %}
-            <option value="{{ varient.id }}">{{ varient.title }}</option>
+      <div class="product-variants">
+        <input
+          type="hidden"
+          name="id"
+          id="variant-id"
+          value="{{ product.selected_or_first_available_variant.id }}"
+        >
+
+        {% if product.variants.size > 1 %}
+          {% for option in product.options_with_values %}
+            <fieldset>
+              <legend>{{ option.name }}</legend>
+              {% for value in option.values %}
+                <input
+                  type="radio"
+                  name="{{ option.name }}"
+                  value="{{ value }}"
+                  id="{{ option.name | handleize }} - {{ value | handleize }}"
+                  {% if option.selected_value == value %}
+                    checked
+                  {% endif %}
+                >
+                <label
+                  class="
+                    {% if option.selected_value == value %}
+                      selected-option
+                    {% endif %}
+                  "
+                  for="{{ option.name | handleize }} - {{ value | handleize }}"
+                >
+                  {{- value -}}
+                </label>
+              {% endfor %}
+            </fieldset>
           {% endfor %}
-        </select>
+        {% endif %}
       </div>
 
-      <button type="submit">Add To Cart</button>
+      <div class="product-quantity">
+        <label for="quantity">Quantity</label>
+        <div>
+          <button class="minus">{% render 'icon-minus' %}</button>
+          <input type="number" name="quantity" id="product-quantity" value="1" min="1">
+          <button class="plus">{% render 'icon-plus' %}</button>
+        </div>
+      </div>
+
+      <div class="form-btns">
+        <button type="submit" class="submit-btn">Add To Cart</button>
+        <button id="buy-now-btn">Buy Now</button>
+      </div>
     {% endform %}
   </section>
 </main>
+
+<script>
+  const productJson = {{ product | json }};
+
+  document.querySelectorAll(".product-variants input[type='radio']").forEach((input) => {
+    input.addEventListener('change', () => {
+      //change css color for input label
+      document.querySelectorAll(`.product-variants label`).forEach((label) => {
+        label.classList.remove('selected-option');
+      });
+
+      const selectedOptions = [];
+      document.querySelectorAll(".product-variants input[type='radio']:checked").forEach((checkedInput) => {
+        document.querySelector(`.product-variants label[for='${checkedInput.id}']`).classList.add('selected-option');
+
+        selectedOptions.push(checkedInput.value)
+      });
+
+      //find matched variant
+      const matchedVariant = productJson.variants.find(variant => {
+        let matched = true;
+        for(let i = 0; i < selectedOptions.length; i++){
+          if(selectedOptions.indexOf(variant.options[i]) === -1){
+            matched = false;
+            break;
+          }
+        }
+
+        return matched;
+      })
+ 
+      //set variant id
+      document.getElementById('variant-id').value = matchedVariant.id;
+      document.querySelector('.product-page .product-info .compare_at_price').innerText = formatMoney(matchedVariant.compare_at_price, '{{ shop.money_format }}');
+      document.querySelector('.product-page .product-info .price').innerText = formatMoney(matchedVariant.price, '{{ shop.money_format }}');
+
+      //set url query
+      const url = new URLParse(window.location.href, true);
+      url.query.variant = matchedVariant.id;
+      window.history.replaceState(null, null, url.toString());
+
+      //set featured image
+      if(matchedVariant.featured_image){
+        document.getElementById('display-img').setAttribute('src', matchedVariant.featured_image.src);
+      }
+    });
+  });
+
+  //quantity change functionallity
+  document.querySelector(".product-page .product-quantity .minus").addEventListener("click", (e) => {
+    e.preventDefault();
+    const value = parseInt(document.getElementById('product-quantity').value);
+    if(value <= 1){
+      document.getElementById('product-quantity').value = 1;
+    } else{
+      document.getElementById('product-quantity').value = value - 1;
+    }
+  })
+
+  document.querySelector(".product-page .product-quantity .plus").addEventListener("click", (e) => {
+    e.preventDefault();
+    const value = parseInt(document.getElementById('product-quantity').value);
+    document.getElementById('product-quantity').value = value + 1;
+  })
+
+  document.getElementById('product-quantity').addEventListener("change", (e) => {
+    if(e.target.value <=0){
+      e.target.value = 1;
+    };
+  })
+
+  //buy now functionallity
+  document.getElementById('buy-now-btn').addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const form = document.querySelector(".product-page .shopify-product-form");
+
+    const input = document.createElement('input');
+    input.value = "/checkout";
+    input.type = "hidden";
+    input.name = "return_to";
+
+    form.appendChild(input);
+    form.submit();
+  })
+</script>

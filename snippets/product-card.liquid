@@ -1,6 +1,8 @@
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
 
-<div class="product-card">
+<div
+  class="product-card"
+>
   <div class="img-wrapper">
     <img
       src="{{ product.featured_image | image_url }}"
@@ -19,10 +21,12 @@
       <button type="submit" class="add-to-cart">Add to Cart</button>
     {%- endform -%}
   </div>
-  <div class="product-content">
-    <a href="{{ product.url }}" class="product-card-link">
+  <a draggable="false" href="{{ product.url }}" class="product-card-link">
+    <div class="product-content">
       <h3 class="product-title">{{ product.title }}</h3>
       <p class="product-price">{{ product.price | money }}</p>
-    </a>
-  </div>
+    </div>
+  </a>
 </div>
+
+<script></script>
