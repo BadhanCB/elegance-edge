@@ -47,16 +47,18 @@
 
 @media screen and (min-width: 768px) {
     .top-banner {
-        height: 500px;
+        min-height: 500px;
     }
 }
 @media screen and (min-width: 1024px) {
     .top-banner {
         height: calc(100vh - 96px);
+        min-height: fit-content;
     }
 }
 @media screen and (min-width: 1536px) {
     .top-banner {
-        height: 700px;
+        height: fit-content;
+        min-height: 700px;
     }
 }
